@@ -1,0 +1,48 @@
+---
+Language: Cpp
+BasedOnStyle: Microsoft
+
+# --- Indentation & Alignment ---
+IndentCaseLabels: true                  # cpp_indent_case_labels=true
+IndentCaseBlocks: false                 # cpp_indent_case_contents_when_block=false
+IndentGotoLabels: false                 # cpp_indent_goto_labels=one_left
+IndentPPDirectives: None                # cpp_indent_preprocessor=leftmost_column
+IndentRequiresClause: true
+AlignAfterOpenBracket: Align            # cpp_indent_multi_line_relative_to=innermost_parenthesis
+
+# --- Braces & Newlines ---
+# Note: clang-format enforces a consistent brace style rather than "ignore",
+# so Attach (K&R) or Allman is picked as the base; Allman matches Microsoft's default,
+# while Attach matches your `else` and `while` rules best:
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterFunction: true                  # Attach style (closest to keeping existing same-line braces)
+  AfterControlStatement: Always
+  AfterStruct: true
+  AfterEnum: true
+  BeforeElse: true                      # cpp_new_line_before_else=true
+  BeforeCatch: true                     # cpp_new_line_before_catch=true
+  BeforeWhile: false                    # cpp_new_line_before_while_in_do_while=false
+  SplitEmptyFunction: true              # cpp_new_line_close_brace_same_line_empty_function=false
+  SplitEmptyRecord: true                # cpp_new_line_close_brace_same_line_empty_type=false
+
+AllowShortBlocksOnASingleLine: Empty    # cpp_wrap_preserve_blocks=one_liners
+AllowShortFunctionsOnASingleLine: InlineOnly
+# Add under your Braces & Newlines section in .clang-format:
+AllowShortIfStatementsOnASingleLine: WithoutElse
+ColumnLimit: 120   # Optional: adjust the max line length before it wraps
+
+# --- Spacing ---
+PointerAlignment: Left                  # cpp_space_pointer_reference_alignment=left
+SpaceBeforeParens: Never                # cpp_space_after_keywords_in_control_flow_statements=false
+                                        # & cpp_space_before_function_open_parenthesis=remove
+SpaceInEmptyParentheses: false          # cpp_space_between_empty_parameter_list_parentheses=false
+SpacesInParentheses: false              # cpp_space_within_*_parentheses=false
+SpacesInCStyleCastParentheses: false    # cpp_space_within_cast_parentheses=false
+SpaceAfterCStyleCast: false             # cpp_space_after_cast_close_parenthesis=false
+SpaceBeforeCpp11BracedList: false       # cpp_space_before_initializer_list_open_brace=false
+SpacesInContainerLiterals: true         # cpp_space_within_initializer_list_braces=true
+SpaceBeforeSquareBrackets: false        # cpp_space_before_open_square_bracket=false
+SpacesInSquareBrackets: false           # cpp_space_within_square_brackets=false
+SpaceBeforeAssignmentOperators: true    # cpp_space_around_assignment_operator=insert
+SpaceInEmptyBlock: false                # cpp_space_between_empty_braces=false

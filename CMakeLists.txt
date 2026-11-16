@@ -1,22 +1,19 @@
-cmake_minimum_required(VERSION 4.3.0 )
+cmake_minimum_required(VERSION 4.2.0)
 
-project(GRAVITY)
+project(GRAVITY VERSION 1.0.0 LANGUAGES C)
 
-set(INCLUDE_DIR
-    ${CMAKE_HOME_DIRECTORY}/include
-    ${CMAKE_HOME_DIRECTORY}/vendor/RAYLIB/include
-)
+option(BUILD_TESTING "Enable testing and build tests" OFF)
 
-set(LINK_DIR
-    ${CMAKE_HOME_DIRECTORY}/vendor/RAYLIB/lib
-)
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS OFF)
 
-set(LINK_LIB
-    raylib
-)
+set(RAYLIB_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/vendor/RAYLIB/include")
+set(RAYLIB_LIB_DIR "${PROJECT_SOURCE_DIR}/vendor/RAYLIB/lib")
 
-add_executable(${PROJECT_NAME} src/main.c)
+add_subdirectory(src)
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDE_DIR})
-target_link_directories(${PROJECT_NAME} PRIVATE ${LINK_DIR})
-target_link_libraries(${PROJECT_NAME} PRIVATE ${LINK_LIB})
+if(BUILD_TESTING)
+  enable_testing()
+  add_subdirectory(tests)
+endif()

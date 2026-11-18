@@ -9,7 +9,9 @@
 #define MAX_FORCE_COUNT (MAX_OBJ_COUNT * (MAX_OBJ_COUNT - 1))
 
 grv_object* OBJECTS_ARENA[MAX_OBJ_COUNT];
-grv_force* FORCES_ARENA[MAX_OBJ_COUNT];
+grv_force* FORCES_ARENA[MAX_FORCE_COUNT];
+
+void recalcGravityForce(grv_force* force);
 
 struct grv_world_t
 {
@@ -55,27 +57,10 @@ void grv_addObject(grv_world* self, double mass, double radius, double x, double
 
     for(int i = 0; i < self->object_count - 1; i++)
     {
-        grv_object* other = self->objects[i];
-
-        grv_vector2d self_pos = grv_getPosition(object);
-        grv_vector2d other_pos = grv_getPosition(other);
-        grv_vector_scale(&other_pos, -1);
-
-        grv_vector2d force_vector = (grv_vector2d){0, 0};
-
-        grv_vector_add(&force_vector, &self_pos);
-        grv_vector_add(&force_vector, &other_pos);
-        grv_vector_normalize(&force_vector);
-
-        double force_value = grv_gravityForce(grv_getMass(object), grv_getMass(other),
-                                              grv_distanceSquare(self_pos.x, self_pos.y, other_pos.x, other_pos.y));
-
-        self->forces[self->force_count++] =
-            grv_createForce(grv_vector_scaled(&force_vector, force_value), object, other);
+        self->forces[self->force_count] = grv_createForce((grv_vector2d){0, 0}, object, self->objects[i]);
+        recalcGravityForce(self->forces[self->force_count++]);
     }
 }
-
-void recalcGravityForce(grv_force* force);
 
 void update(grv_world* self, double dt)
 {
@@ -91,7 +76,6 @@ void update(grv_world* self, double dt)
 
     for(int i = 0; i < self->object_count; i++)
         grv_updatePosition(self->objects[i], dt);
-    
 }
 
 void render(grv_world* self, double zoom)
@@ -109,12 +93,11 @@ void recalcGravityForce(grv_force* force)
 
     grv_vector2d self_pos = grv_getPosition(object);
     grv_vector2d other_pos = grv_getPosition(other);
-    grv_vector_scale(&other_pos, -1);
 
     grv_vector2d force_vector = (grv_vector2d){0, 0};
 
     grv_vector_add(&force_vector, &self_pos);
-    grv_vector_add(&force_vector, &other_pos);
+    grv_vector_sub(&force_vector, &other_pos);
     grv_vector_normalize(&force_vector);
 
     double force_value = grv_gravityForce(grv_getMass(object), grv_getMass(other),

@@ -10,6 +10,8 @@ typedef struct grv_vector2d_t
 
 void grv_vector_add(grv_vector2d* self, const grv_vector2d* other);
 
+void grv_vector_sub(grv_vector2d* self, const grv_vector2d* other);
+
 void grv_vector_scale(grv_vector2d* self, double scalar);
 
 grv_vector2d grv_vector_scaled(grv_vector2d* self, double scalar);

@@ -9,6 +9,14 @@ void grv_vector_add(grv_vector2d* self, const grv_vector2d* other)
     self->y += other->y;
 }
 
+void grv_vector_sub(grv_vector2d* self, const grv_vector2d* other)
+{
+    if(!self || !other) return;
+
+    self->x -= other->x;
+    self->y -= other->y;
+}
+
 void grv_vector_scale(grv_vector2d* self, double scalar)
 {
     self->x *= scalar;

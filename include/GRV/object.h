@@ -1,8 +1,9 @@
 #pragma once
+
+#include "color.h"
 #include "vector.h"
 
 typedef struct grv_object_t grv_object;
-typedef struct grv_color_t grv_color;
 
 grv_object* grv_createObject(double mass, double radius, double x, double y, grv_color color);
 
@@ -12,4 +13,13 @@ void grv_addForce(grv_object* object, grv_vector2d force_vector);
 
 void grv_updatePosition(grv_object* self, double dt);
 
-grv_color grv_makeColor(unsigned char r, unsigned char g, unsigned char b, unsigned char a);
+void grv_resetAcceleration(grv_object* self);
+
+void grv_drawObject(grv_object* self, double zoom);
+
+double grv_getMass(const grv_object* self);
+
+double grv_getRadius(const grv_object* self);
+
+grv_vector2d grv_getPosition(const grv_object* self);
+

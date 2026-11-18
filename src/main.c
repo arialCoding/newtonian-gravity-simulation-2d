@@ -1,28 +1,8 @@
 #include "raylib.h"
 
-#include "GRV/force.h"
-#include "GRV/object.h"
+#include "GRV/world.h"
 
-typedef struct grv_color_t
-{
-    unsigned char r;
-    unsigned char g;
-    unsigned char b;
-    unsigned char a;
-} grv_color;
-
-struct grv_object_t
-{
-    unsigned int id;
-    double mass;   // kg
-    double radius; // m
-    grv_vector2d position;
-    grv_vector2d velocity; // ||velocity|| -> m/s
-    grv_vector2d cumulated_acceleraton;
-    grv_color color;
-};
-
-const int zoomFactor = 50;
+const double zoomFactor = 50; // 1 meter = zoomFactor pixels
 
 int main()
 {
@@ -30,9 +10,9 @@ int main()
     const int screenHeight = 720;
     Color background = (Color){0x12, 0x12, 0x12, 255};
 
-    grv_object* obj1 = grv_createObject(2, 1, 300, 300, grv_makeColor(255, 0, 0, 255));
-
-    grv_addForce(obj1, (grv_vector2d){0, 50});
+    grv_world* world = grv_initWorld();
+    grv_addObject(world, 10000, 0.5, 5, 7, (grv_color){255, 0, 0, 255});
+    grv_addObject(world, 1000, 0.8, 13, 7, (grv_color){0, 128, 255, 255});
 
     InitWindow(screenWidth, screenHeight, "GRAVITY SIMULATION - V1: Newtonian, 2D");
 
@@ -41,13 +21,13 @@ int main()
 
     while(!WindowShouldClose())
     {
-        grv_updatePosition(obj1, dt);
+        update(world, dt);
 
         BeginDrawing();
 
         ClearBackground(background);
 
-        DrawCircle(obj1->position.x, obj1->position.y, obj1->radius * zoomFactor, *(Color*)(&obj1->color));
+        render(world, zoomFactor);
 
         EndDrawing();
 
@@ -57,7 +37,7 @@ int main()
 
     CloseWindow();
 
-    grv_destroyObject(obj1);
+    grv_destroyWorld(world);
 
     return 0;
 }

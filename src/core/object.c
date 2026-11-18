@@ -1,15 +1,8 @@
 #include "GRV/object.h"
 #include "GRV/vector.h"
 
-#include "stdlib.h"
-
-typedef struct grv_color_t
-{
-    unsigned char r;
-    unsigned char g;
-    unsigned char b;
-    unsigned char a;
-} grv_color;
+#include <stdlib.h>
+#include <raylib.h>
 
 struct grv_object_t
 {
@@ -62,7 +55,29 @@ void grv_updatePosition(grv_object* self, double dt)
     grv_vector_add(&self->velocity, &dv);
 }
 
-grv_color grv_makeColor(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
+void grv_resetAcceleration(grv_object* self)
 {
-    return (grv_color){r, g, b, a};
+    self->cumulated_acceleraton.x = 0;
+    self->cumulated_acceleraton.y = 0;
 }
+
+void grv_drawObject(grv_object* self, double zoom)
+{
+    DrawCircle(self->position.x*zoom, self->position.y*zoom, self->radius * zoom, *(Color*)&self->color);
+}
+
+double grv_getMass(const grv_object* self)
+{
+    return self->mass;
+}
+
+double grv_getRadius(const grv_object* self)
+{
+    return self->radius;
+}
+
+grv_vector2d grv_getPosition(const grv_object* self)
+{
+    return self->position;
+}
+

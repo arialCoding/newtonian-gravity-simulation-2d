@@ -1,4 +1,5 @@
 #include "GRV/force.h"
+#include <stdlib.h>
 
 struct grv_force_t
 {
@@ -7,14 +8,19 @@ struct grv_force_t
     grv_object* reciever;
 };
 
-grv_force grv_createForce(grv_vector2d force_vector, grv_object* actor, grv_object* reciever)
+grv_force* grv_createForce(grv_vector2d force_vector, grv_object* actor, grv_object* reciever)
 {
-    grv_force force;
-    force.force_vector = force_vector;
-    force.actor = actor;
-    force.reciever = reciever;
+    grv_force* force = malloc(sizeof(grv_force));
+    force->force_vector = force_vector;
+    force->actor = actor;
+    force->reciever = reciever;
 
     return force;
+}
+
+void grv_destroyForce(grv_force* self)
+{
+    free(self);
 }
 
 void grv_applyForce(grv_force* force)
@@ -30,4 +36,16 @@ void grv_getForceVector(grv_force* force, double* x, double* y)
 {
     if(x) *x = force->force_vector.x;
     if(y) *y = force->force_vector.y;
+}
+
+void grv_getActors(grv_force* self, const grv_object** actor, const grv_object** reciever)
+{
+    *actor = self->actor;
+    *reciever = self->reciever;
+}
+
+void grv_updateForceVector(grv_force* force, double x, double y)
+{
+    force->force_vector.x = x;
+    force->force_vector.y = y;
 }

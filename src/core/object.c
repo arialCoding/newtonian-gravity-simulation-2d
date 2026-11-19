@@ -55,6 +55,12 @@ void grv_updatePosition(grv_object* self, double dt)
     grv_vector_add(&self->velocity, &dv);
 }
 
+void grv_setVelocity(grv_object* self, double vx, double vy)
+{
+    self->velocity.x = vx;
+    self->velocity.y = vy;
+}
+
 void grv_resetAcceleration(grv_object* self)
 {
     self->cumulated_acceleraton.x = 0;

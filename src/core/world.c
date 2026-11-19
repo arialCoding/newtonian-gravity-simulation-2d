@@ -45,11 +45,13 @@ void grv_destroyWorld(grv_world* self)
     free(self);
 }
 
-void grv_addObject(grv_world* self, double mass, double radius, double x, double y, grv_color color)
+void grv_addObject(grv_world* self, double mass, double radius, double x, double y, double vx, double vy, grv_color color)
 {
     if(self->object_count >= MAX_OBJ_COUNT || self->force_count >= MAX_FORCE_COUNT) return;
 
     grv_object* object = grv_createObject(mass, radius, x, y, color);
+
+    grv_setVelocity(object, vx, vy);
 
     self->objects[self->object_count] = object;
 

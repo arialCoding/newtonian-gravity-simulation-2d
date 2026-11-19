@@ -13,6 +13,8 @@ void grv_addForce(grv_object* object, grv_vector2d force_vector);
 
 void grv_updatePosition(grv_object* self, double dt);
 
+void grv_setVelocity(grv_object* self, double vx, double vy);
+
 void grv_resetAcceleration(grv_object* self);
 
 void grv_drawObject(grv_object* self, double zoom);

@@ -1,6 +1,6 @@
 #include "GRV/calculations.h"
 
-#define G 1
+#define G 1e10
 
 
 double grv_gravityForce(double m1, double m2, double distance_square)

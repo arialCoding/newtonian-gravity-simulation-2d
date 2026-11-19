@@ -1,7 +1,6 @@
 #pragma once
 
-#include "color.h"
-
+typedef struct grv_color_t grv_color;
 typedef struct grv_world_t grv_world;
 
 grv_world* grv_initWorld();

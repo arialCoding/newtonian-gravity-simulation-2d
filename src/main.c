@@ -1,4 +1,5 @@
 #include "GRV/world.h"
+#include "core/color.h"
 #include "raylib.h"
 #include <math.h>
 

@@ -1,4 +1,4 @@
-#include "GRV/vector.h"
+#include "vector.h"
 #include "math.h"
 
 void grv_vector_add(grv_vector2d* self, const grv_vector2d* other)

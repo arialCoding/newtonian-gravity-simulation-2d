@@ -1,4 +1,4 @@
-#include "GRV/force.h"
+#include "force.h"
 #include <stdlib.h>
 
 struct grv_force_t

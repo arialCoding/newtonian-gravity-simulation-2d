@@ -1,7 +1,7 @@
 #include "GRV/world.h"
-#include "GRV/calculations.h"
-#include "GRV/force.h"
-#include "GRV/object.h"
+#include "calculations.h"
+#include "force.h"
+#include "object.h"
 
 #include <stdlib.h>
 

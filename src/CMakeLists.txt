@@ -5,11 +5,11 @@ add_library(core STATIC
     core/calculations.c
     core/world.c
 
-    ${PROJECT_SOURCE_DIR}/include/GRV/object.h
-    ${PROJECT_SOURCE_DIR}/include/GRV/vector.h
-    ${PROJECT_SOURCE_DIR}/include/GRV/force.h
-    ${PROJECT_SOURCE_DIR}/include/GRV/color.h
-    ${PROJECT_SOURCE_DIR}/include/GRV/calculations.h
+    core/object.h
+    core/vector.h
+    core/force.h
+    core/color.h
+    core/calculations.h
     ${PROJECT_SOURCE_DIR}/include/GRV/world.h
 )
 

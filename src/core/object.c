@@ -1,5 +1,5 @@
-#include "GRV/object.h"
-#include "GRV/vector.h"
+#include "object.h"
+#include "vector.h"
 
 #include <stdlib.h>
 #include <raylib.h>
